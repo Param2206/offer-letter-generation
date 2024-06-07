@@ -1,0 +1,51 @@
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+
+const app = express();
+
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: "16kb" }));
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.static("public"));
+app.use(cookieParser());
+
+import courseRouter from "./routes/course.routes.js";
+import studentRouter from "./routes/student.routes.js";
+import userRouter from "./routes/user.routes.js";
+import pdfRouter from './routes/pdf.routes.js';
+import lastIdRouter from './routes/lastId.routes.js';
+
+app.use("/api/courses", courseRouter);
+app.use('/api/students', studentRouter);
+app.use("/api/users", userRouter);
+app.use('/api/pdf', pdfRouter);
+app.use('/api/last-id', lastIdRouter);
+
+app.get("/", (req, res) => {
+  res.send("Server is ready");
+});
+
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....');
+  });
+}
+
+app.use(notFound);
+app.use(errorHandler);
+
+export { app };
