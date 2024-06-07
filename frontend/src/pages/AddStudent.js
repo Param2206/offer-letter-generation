@@ -57,7 +57,7 @@ const AddStudentForm = () => {
       initialFetchRef.current.courses = false;
       const fetchCourses = async () => {
         try {
-          const response = await axios.get("/api/courses/get");
+          const response = await axios.get("https://offer-letter-generation-backend.onrender.com/api/courses/get");
           setCourses(response.data);
         } catch (error) {
           // console.error("Error fetching courses:", error);
