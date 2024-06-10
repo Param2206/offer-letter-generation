@@ -63,6 +63,7 @@ const logoutUser = (req, res) => {
     httpOnly: true,
     sameSite: "Strict",
     secure: true,
+    partitioned: true,
     expires: new Date(0),
   });
   res.status(200).json({ message: "Logged out successfully" });
