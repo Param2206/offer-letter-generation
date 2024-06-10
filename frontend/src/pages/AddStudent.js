@@ -168,6 +168,7 @@ const AddStudentForm = () => {
   };
 
   const getUniqueQualifications = () => {
+    console.log(courses);
     setUniqueQualifications([
       ...new Set(courses.map((course) => course.qualification)),
     ]);

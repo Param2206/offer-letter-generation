@@ -1,6 +1,6 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ baseUrl: "https://offer-letter-generation-api.onrender.com" });
+const baseQuery = fetchBaseQuery({ baseUrl: process.env.BASE_URL });
 
 export const apiSlice = createApi({
   baseQuery,
