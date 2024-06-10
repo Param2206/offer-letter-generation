@@ -57,7 +57,7 @@ const AddStudentForm = () => {
       initialFetchRef.current.courses = false;
       const fetchCourses = async () => {
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/courses/get`);
+          const response = await axios.get(`https://offer-letter-generation-api.onrender.com/api/courses/get`);
           setCourses(response.data);
         } catch (error) {
           // console.error("Error fetching courses:", error);
@@ -127,7 +127,7 @@ const AddStudentForm = () => {
 
   const generateStudentId = async () => {
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/api/last-id/get`);
+      const response = await axios.get(`https://offer-letter-generation-api.onrender.com/api/last-id/get`);
       const { lastStudentId } = response.data;
 
       const currentYear = new Date().getFullYear();
@@ -191,7 +191,7 @@ const AddStudentForm = () => {
         .replace(/^0+/, ""); // Remove leading zeroes
 
       // Send request to server to generate offer letter
-      const response = await axios.post(`${process.env.BASE_URL}/api/pdf/generate`, formData, {
+      const response = await axios.post(`https://offer-letter-generation-api.onrender.com/api/pdf/generate`, formData, {
         responseType: "blob", // Receive response as a Blob
       });
 
@@ -214,10 +214,10 @@ const AddStudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/api/students/add`, formData);
+      const response = await axios.post(`https://offer-letter-generation-api.onrender.com/api/students/add`, formData);
       // console.log(response.data);
 
-      await axios.put(`${process.env.BASE_URL}/api/last-id/update`, {
+      await axios.put(`https://offer-letter-generation-api.onrender.com/api/last-id/update`, {
         lastStudentId: newId,
       });
 
