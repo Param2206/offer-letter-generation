@@ -1,17 +1,23 @@
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-app.use(
-  cors({
-    // origin: process.env.CORS_ORIGIN,
-    origin: "https://offer-letter-generation.onrender.com",
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     // origin: process.env.CORS_ORIGIN,
+//     origin: "https://offer-letter-generation.onrender.com",
+//     credentials: true,
+//   })
+// );
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
