@@ -39,7 +39,7 @@ const StudentDetails = () => {
       initialFetchRef.current = false;
       async function fetchData() {
         try {
-          const response = await axios.get("/api/students/get-all");
+          const response = await axios.get(`${process.env.BASE_URL}/api/students/get-all`);
           setStudentData(response.data);
         } catch (error) {
           toast.error("Error fetching students");

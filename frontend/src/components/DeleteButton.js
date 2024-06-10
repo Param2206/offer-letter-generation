@@ -10,7 +10,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const DeleteButton = ({ studentOrCourse, id, onDelete }) => {
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/${studentOrCourse + "s"}/delete/${id}`);
+      await axios.delete(`${process.env.BASE_URL}/api/${studentOrCourse + "s"}/delete/${id}`);
       onDelete(id);
       toast.success(
         `${

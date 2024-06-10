@@ -57,7 +57,7 @@ const EditStudent = () => {
       initialFetchRef.current.courses = false;
       const fetchCourses = async () => {
         try {
-          const response = await axios.get("/api/courses/get");
+          const response = await axios.get(`${process.env.BASE_URL}/api/courses/get`);
           setCourses(response.data);
         } catch (error) {
           toast.error("Error fetching courses");
@@ -73,7 +73,7 @@ const EditStudent = () => {
       initialFetchRef.current.student = false;
       const fetchStudent = async () => {
         try {
-          const response = await axios.get(`/api/students/get/${studentId}`);
+          const response = await axios.get(`${process.env.BASE_URL}/api/students/get/${studentId}`);
           setFormData(response.data);
         } catch (error) {
           toast.error("Error fetching student");
@@ -157,7 +157,7 @@ const EditStudent = () => {
         .substring(studentId.length - 3)
         .replace(/^0+/, "");
 
-      const response = await axios.post("/api/pdf/generate", formData, {
+      const response = await axios.post(`${process.env.BASE_URL}/api/pdf/generate`, formData, {
         responseType: "blob",
       });
 
@@ -178,7 +178,7 @@ const EditStudent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/students/update/${studentId}`, formData);
+      await axios.put(`${process.env.BASE_URL}/api/students/update/${studentId}`, formData);
 
       handleGenerateOfferLetter();
       toast.success("Student updated and offer letter generated successfully");

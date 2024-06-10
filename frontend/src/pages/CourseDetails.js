@@ -30,7 +30,7 @@ const CourseDetails = () => {
       initialFetchRef.current = false;
       async function fetchData() {
         try {
-          const response = await axios.get("/api/courses/get");
+          const response = await axios.get(`${process.env.BASE_URL}/api/courses/get`);
           setCourseData(response.data);
         } catch (error) {
           toast.error("Error fetching courses");

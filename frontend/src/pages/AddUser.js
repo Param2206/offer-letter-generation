@@ -26,7 +26,7 @@ const AddUser = () => {
     }
 
     try {
-      await axios.post("/api/users/add", {
+      await axios.post(`${process.env.BASE_URL}/api/users/add`, {
         name,
         email,
         password,

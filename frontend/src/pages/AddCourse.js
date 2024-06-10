@@ -23,7 +23,7 @@ const AddCourse = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/courses/add", courseData);
+      await axios.post(`${process.env.BASE_URL}/api/courses/add`, courseData);
       toast.success("Course added successfully");
       setCourseData({
         courseName: "",

@@ -30,7 +30,7 @@ const EditCourse = () => {
       initialFetchRef.current = false;
       async function fetchCourse() {
         try {
-          const response = await axios.get(`/api/courses/get/${courseId}`);
+          const response = await axios.get(`${process.env.BASE_URL}/api/courses/get/${courseId}`);
           setCourseData(response.data);
           setInitialCourseData(response.data);
         } catch (error) {
@@ -48,7 +48,7 @@ const EditCourse = () => {
       return;
     }
     try {
-      await axios.put(`/api/courses/update/${courseId}`, courseData);
+      await axios.put(`${process.env.BASE_URL}/api/courses/update/${courseId}`, courseData);
       toast.success("Course updated successfully");
     } catch (error) {
       toast.error("Error updating course");
